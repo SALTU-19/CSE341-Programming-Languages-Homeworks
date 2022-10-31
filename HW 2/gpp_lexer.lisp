@@ -4,6 +4,11 @@
 (setf operators '("(" "+" "-" "/" "*"   "**" "\"" "\"" "," ")"))
 (setq printKeywords '("KW_LIST" "KW_APPEND" "KW_CONCAT" "KW_SET" "KW_DEFFUN" "KW_FOR" "KW_IF" "KW_EXIT" "KW_LOAD" "KW_DISP" "KW_TRUE" "KW_FALSE" "KW_AND" "KW_OR" "KW_ NOT" "KW_EQUAL" "KW_LESS" "KW_NIL" ))
 (setf printOperators '( "OP_OP"  "OP_PLUS" "OP_MINUS" "OP_DIV" "OP_MULT" "OP_DBLMULT" "OP_OC" "OP_CC" "OP_COMMA" "OP_CP"))
+(setq identifierFlag 0)
+(setq operatorFlag 0)
+(setq keywordFlag 0)
+
+
 
 ; read from file in lisp 
 (defun read-from-file (filename)
@@ -40,27 +45,25 @@
 
 (defun search-values (words)
     (loop for word in words
-
-
-
+        do (setq identifierFlag 0)
+        do (setq operatorFlag 0)
+        do (setq keywordFlag 0)
         do (loop for i from 0 to (1- (length operators))
-            do (if (find-substring word (elt operators i))
+            do (when (find-substring word (elt operators i))
                         (format t "~a~%" (elt printOperators i))
                         (setq operatorFlag 1)
                         )
         )
         do (loop for i from 0 to (1- (length keywords))
-            do (if (find-substring word (elt keywords i))
+            do (when (find-substring word (elt keywords i))
                         (format t "~a~%" (elt printKeywords i))
                         (setq keywordFlag 1)
                         )
         )
-        do (setq identifierFlag (not (and operatorFlag keywordFlag)))
-        (if identifierFlag
+        (setq identifierFlag (or operatorFlag keywordFlag))
+        (when (equal identifierFlag 0)
             (format t "~a~%" "IDENTIFIER")
-            (setq identifierFlag 0)
-            )
-                     
+        )            
     )
 )
 
@@ -77,8 +80,6 @@
 ; parse file content split by space
 (loop for line in fileContent do 
     (setq words (my-split line))
-    (print-words words)
-    (format t "~a~%" "--------------")
     (search-values words))
 
 
