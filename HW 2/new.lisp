@@ -40,7 +40,12 @@
             while line
             collect line)))
 
-
+; find substring in string
+(defun find-substring (string substring)
+    (let ((index (search substring string)))
+        (if index
+            (values index (1+ index))
+            nil)))
 ; search for values in words
 (defun search-values (word)
     (setq valueEqual 0) 
@@ -435,10 +440,16 @@
 ; call file read function
 (setq fileContent (read-from-file filename))
 ; parse file content split by space
-(loop for line in fileContent do 
-    (setq words (split line))
-    (search-values words)
+(loop for line in fileContent do
+    (when (find-substring line ";;")
+        (format t "~a~%" "COMMENT")
     )
+    (when (not (find-substring line ";;"))
+        (setq words (split line))
+        (search-values words)
+    )
+
+)
 
 
 

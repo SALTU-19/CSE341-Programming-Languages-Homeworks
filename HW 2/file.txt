@@ -1,3 +1,4 @@
+;; helloworld.g++
 (deffun sumup (x) 
  (if (equal x 0) 
  1 
