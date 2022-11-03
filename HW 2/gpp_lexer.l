@@ -6,55 +6,55 @@ int quotesCount = 0;
 
 %%
 
-";;".* {printf("COMMENT\n");}
-and {printf("KW_AND\n");}
-or {printf("KW_OR\n");}
-not {printf("KW_NOT\n");}
-equal {printf("KW_EQUAL\n");} 
-less {printf("KW_LESS\n");} 
-nil {printf("KW_NIL\n");} 
-list {printf("KW_LIST\n");} 
-append {printf("KW_APPEND\n");} 
-concat {printf("KW_CONCAT\n");}
-set {printf("KW_SET\n");} 
-deffun {printf("KW_DEFFUN\n");}
-for {printf("KW_FOR\n");}
-if {printf("KW_IF\n");}
-exit {printf("KW_EXIT\n");}
-load {printf("KW_LOAD\n");}
-disp {printf("KW_DISP\n");}
-true {printf("KW_TRUE\n");}
-false {printf("KW_FALSE\n");}
-[+] {printf("OP_PLUS\n");}
-[-] {printf("OP_MINUS\n");}
-[/] {printf("OP_DIV\n");}
-[*] {printf("OP_MULT\n");}
-[(] {printf("OP_OP\n");}
-[)] {printf("OP_CP\n");}
-[*][*] {printf("OP_DBLMULT\n");}
+";;".* {printf("%s: COMMENT\n",yytext);}
+and {printf("%s: KW_AND\n",yytext);}
+or {printf("%s: KW_OR\n",yytext);}
+not {printf("%s: KW_NOT\n",yytext);}
+equal {printf("%s: KW_EQUAL\n",yytext);} 
+less {printf("%s: KW_LESS\n",yytext);} 
+nil {printf("%s: KW_NIL\n",yytext);} 
+list {printf("%s: KW_LIST\n",yytext);} 
+append {printf("%s: KW_APPEND\n",yytext);} 
+concat {printf("%s: KW_CONCAT\n",yytext);}
+set {printf("%s: KW_SET\n",yytext);} 
+deffun {printf("%s: KW_DEFFUN\n",yytext);}
+for {printf("%s: KW_FOR\n",yytext);}
+if {printf("%s: KW_IF\n",yytext);}
+exit {printf("%s: KW_EXIT\n",yytext);}
+load {printf("%s: KW_LOAD\n",yytext);}
+disp {printf("%s: KW_DISP\n",yytext);}
+true {printf("%s: KW_TRUE\n",yytext);}
+false {printf("%s: KW_FALSE\n",yytext);}
+[+] {printf("%s: OP_PLUS\n",yytext);}
+[-] {printf("%s: OP_MINUS\n",yytext);}
+[/] {printf("%s: OP_DIV\n",yytext);}
+[*] {printf("%s: OP_MULT\n",yytext);}
+[(] {printf("%s: OP_OP\n",yytext);}
+[)] {printf("%s: OP_CP\n",yytext);}
+[*][*] {printf("%s: OP_DBLMULT\n",yytext);}
 ["] {
     if(quotesCount % 2 == 0){
-        printf("OP_OC\n");
+        printf("%s: OP_OC\n",yytext);
         quotesCount++;
     }
     else
-        printf("OP_CC\n");
+        printf("%s: OP_CC\n",yytext);
 }
-[,] {printf("OP_COMMA\n");}
-[0-9]+ {printf("VALUEI\n");}
-[0-9]+[f][0-9]+ {printf("VALUEF\n");}
+[,] {printf("%s: OP_COMMA\n",yytext);}
+[0-9]+ {printf("%s: VALUEI\n",yytext);}
+[0-9]+[f][0-9]+ {printf("%s: VALUEF\n",yytext);}
 [ ] {}
-[a-zA-Z][a-zA-Z0-9]* {printf("IDENTIFER\n");}
+[a-zA-Z][a-zA-Z0-9]* {printf("%s: IDENTIFER\n",yytext);}
 [0-9][0-9a-zA-Z]+ {printf("SYNTAX_ERROR %s cannot be tokenized\n", yytext); return 0;}
 .	 {printf("SYNTAX_ERROR %s cannot be tokenized\n", yytext);}
-\n {return 0;}
+\n\n {return 0;}
 %%
 
 
 int yywrap(){}
 int main(){
 
-printf("Enter string: ");
+printf("Enter string(for exit enter '\\n\\n'): ");
 yylex();
 
 
