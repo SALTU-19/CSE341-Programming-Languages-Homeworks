@@ -925,45 +925,65 @@ YY_RULE_SETUP
 case 29:
 YY_RULE_SETUP
 #line 44 "gpp_lexer.l"
-{printf("%s: VALUEI\n",yytext);}
+{
+    
+    if(quotesCount % 2 == 0){
+        printf("%s: VALUEI\n",yytext);
+    }
+    else
+        printf("%s: VALUESTR\n",yytext);
+    
+}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 45 "gpp_lexer.l"
-{printf("%s: VALUEF\n",yytext);}
+#line 53 "gpp_lexer.l"
+{
+    if(quotesCount % 2 == 0){
+        printf("%s: VALUEF\n",yytext);
+    }
+    else
+        printf("%s: VALUESTR\n",yytext);
+}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 46 "gpp_lexer.l"
+#line 60 "gpp_lexer.l"
 {}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 47 "gpp_lexer.l"
-{printf("%s: IDENTIFER\n",yytext);}
+#line 61 "gpp_lexer.l"
+{
+    if(quotesCount % 2 == 0){
+        printf("%s: IDENTIFIER\n",yytext);
+    }
+    else
+        printf("%s: VALUESTR\n",yytext);
+}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 48 "gpp_lexer.l"
-{printf("SYNTAX_ERROR %s cannot be tokenized\n", yytext); return 0;}
+#line 68 "gpp_lexer.l"
+{printf("LEXICAL ERROR: %s identifier can not be start number\n", yytext); return 0;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 49 "gpp_lexer.l"
+#line 69 "gpp_lexer.l"
 {printf("SYNTAX_ERROR %s cannot be tokenized\n", yytext);}
 	YY_BREAK
 case 35:
 /* rule 35 can match eol */
 YY_RULE_SETUP
-#line 50 "gpp_lexer.l"
+#line 70 "gpp_lexer.l"
 {return 0;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 51 "gpp_lexer.l"
+#line 71 "gpp_lexer.l"
 ECHO;
 	YY_BREAK
-#line 967 "lex.yy.c"
+#line 987 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1968,7 +1988,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 51 "gpp_lexer.l"
+#line 71 "gpp_lexer.l"
 
 
 

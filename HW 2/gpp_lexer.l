@@ -41,11 +41,31 @@ false {printf("%s: KW_FALSE\n",yytext);}
         printf("%s: OP_CC\n",yytext);
 }
 [,] {printf("%s: OP_COMMA\n",yytext);}
-[0-9]+ {printf("%s: VALUEI\n",yytext);}
-[0-9]+[f][0-9]+ {printf("%s: VALUEF\n",yytext);}
+[0-9]+ {
+    
+    if(quotesCount % 2 == 0){
+        printf("%s: VALUEI\n",yytext);
+    }
+    else
+        printf("%s: VALUESTR\n",yytext);
+    
+}
+[0-9]+[f][0-9]+ {
+    if(quotesCount % 2 == 0){
+        printf("%s: VALUEF\n",yytext);
+    }
+    else
+        printf("%s: VALUESTR\n",yytext);
+}
 [ ] {}
-[a-zA-Z][a-zA-Z0-9]* {printf("%s: IDENTIFER\n",yytext);}
-[0-9][0-9a-zA-Z]+ {printf("SYNTAX_ERROR %s cannot be tokenized\n", yytext); return 0;}
+[a-zA-Z][a-zA-Z0-9]* {
+    if(quotesCount % 2 == 0){
+        printf("%s: IDENTIFIER\n",yytext);
+    }
+    else
+        printf("%s: VALUESTR\n",yytext);
+}
+[0-9][0-9a-zA-Z]+ {printf("LEXICAL ERROR: %s identifier can not be start number\n", yytext); return 0;}
 .	 {printf("SYNTAX_ERROR %s cannot be tokenized\n", yytext);}
 \n\n {return 0;}
 %%
