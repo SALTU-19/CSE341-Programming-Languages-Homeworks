@@ -7,7 +7,7 @@
 (setq appendKeywords (split "append "))
 (setq concatKeywords (split "concat "))
 (setq setKeywords (split "set "))
-(setq deffunKeywords (split "deffun "))
+(setq deffunKeywords (split "deffun"))
 (setq forKeywords (split "for "))
 (setq ifKeywords (split "if "))
 (setq exitKeywords (split "exit "))
@@ -83,8 +83,13 @@
                     )
                 )
                 (when (and (equal deffunFlag 1) (equal counter (length deffunKeywords)))
-                    ;; (prin1 a)
-                    (setq returnedList (append returnedList (list (list "DEFFUN" "KW_DEFFUN"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "DEFFUN" "VALUESTR")))))
+                        (spaceStr (setq returnedList (append returnedList (list (list "DEFFUN" "KW_DEFFUN")))))
+                        ((and (not spaceStr) (not valueStr))  (setq deffunFlag 0))
+                    )
                     (setq counter 0)
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
@@ -475,6 +480,7 @@
                 )
                 ;; check identifier
                 (when (and (equal identifierFlag 1))
+                
                     (setf b (or (every #'alpha-char-p (elt word i)) (equal (elt word i) "_")))
                     (when b
                         (setq identifierFlag 1)
@@ -484,17 +490,28 @@
                     (when (not b)
                         (setq identifierFlag 0)
                     )
+                    
                 )
+                
                 (when (and (equal identifierFlag 1) (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")") (equal (elt word (1+ i)) "\"")))
+                    
                     (when (equal (elt word (1+ i)) "\"")
                         (setf strFlag t) 
                     )
+                    
                     (setq identifierList (list ""))
                     (loop for k from (- i (1- counter)) to i do
+                        
                         (setq identifierList (append identifierList (list (elt word k))))
+                       
                     )
+                    
                     (setq identiferListTemp (cdr identifierList))
+                    (when (< i counter)
+                        (setq i counter)
+                    )
                     (when (and (every #'digit-char-p (elt word (- i counter))) (not strFlag)  )
+                        
                         ;;(prin1 (list (concatString identiferListTemp) "LEXICAL ERROR: IDENTIFIER CONTAINS A NUMBER"))
                         (setq returnedList (append returnedList (list (list (concatString identiferListTemp) "LEXICAL ERROR: IDENTIFIER CANNOT START WITH A NUMBER"))))
                         (setf exitLoopFlag t)
@@ -504,11 +521,10 @@
                         (setq falseFlag 0)(setq nilFlag 0)(setq listFlag 0)(setq appendFlag 0)(setq concatFlag 0)(setq setFlag 0)(setq counter 0)
                         (setq valueFlag 0)(setq identifierFlag 0)
                     )
-
                     ;;(prin1 (list (concatString identiferListTemp) "IDENTIFIER"))
                     (cond 
-                        ((and strFlag (not exitFlag)) (setq returnedList (append returnedList (list (list (concatString identiferListTemp) "VALUESTR")))) )
-                        ( (setq returnedList (append returnedList (list (list (concatString identiferListTemp) "IDENTIFIER")))) )
+                        ((and strFlag (not exitLoopFlag)) (setq returnedList (append returnedList (list (list (concatString identiferListTemp) "VALUESTR")))) )
+                        ((not exitLoopFlag) (setq returnedList (append returnedList (list (list (concatString identiferListTemp) "IDENTIFIER")))) )
                     )
                     ;;(setq returnedList (append returnedList (list (list (concatString identiferListTemp) "IDENTIFIER"))))
                     (setq counter 0)
@@ -538,7 +554,9 @@
             (setq returnedList (append returnedList (list (list line "COMMENT"))))
         )
         (when (not (find-substring line ";;"))
+            
             (setq words (split line))
+            (setq words (append words (list " ")))
             ;; value check
             (setq returnedList (search-values words returnedList))
         )
@@ -548,15 +566,25 @@
 )
 
 (defun main ()
-    ; take filename from user and read it
-    (princ "Enter file name:")
-    (setq filename (read))
-    ; call file read function
-    (setq fileContent (read-from-file filename))
-    ; call gppinterpreter function
-    (print (gppinterpreter fileContent))
+    (when *args*
+        (setq filename (elt *args* 0))
+        ; call file read function
+        (setq fileContent (read-from-file filename))
+        ; call gppinterpreter function
+        (print (gppinterpreter fileContent))
+    )
+    (when (not *args*)
+        (princ "Enter input string: ")
+        
+        (setq inputString (read-line))
+        (print (gppinterpreter (list inputString)))
+    )
+
 )
+;; call main function
 (main)
+
+
 
 
 

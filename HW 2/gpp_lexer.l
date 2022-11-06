@@ -6,7 +6,7 @@ int quotesCount = 0;
 
 %%
 
-";;".* {printf("%s: COMMENT\n",yytext);}
+;;.* {printf("%s:COMMENT\n",yytext);}
 and {printf("%s: KW_AND\n",yytext);}
 or {printf("%s: KW_OR\n",yytext);}
 not {printf("%s: KW_NOT\n",yytext);}
@@ -57,7 +57,7 @@ false {printf("%s: KW_FALSE\n",yytext);}
     else
         printf("%s: VALUESTR\n",yytext);
 }
-[ ] {}
+[[:space:]]+ 		/* ignore space */
 [a-zA-Z][a-zA-Z0-9]* {
     if(quotesCount % 2 == 0){
         printf("%s: IDENTIFIER\n",yytext);
@@ -66,15 +66,29 @@ false {printf("%s: KW_FALSE\n",yytext);}
         printf("%s: VALUESTR\n",yytext);
 }
 [0-9][0-9a-zA-Z]+ {printf("LEXICAL ERROR: %s identifier can not be start number\n", yytext); return 0;}
-.	 {printf("SYNTAX_ERROR %s cannot be tokenized\n", yytext);}
-\n\n {return 0;}
+.	 {printf("SYNTAX_ERROR %s cannot be tokenized\n", yytext); return 0;}
 %%
 
 
 int yywrap(){}
-int main(){
+int main(int argc, char *argv[]){
 
-printf("Enter string(for exit enter '\\n\\n'): ");
+// Uncomment the lines below 
+// to take input from file
+FILE *fp;
+char *filename;
+if(argv[1] != NULL){
+    filename = argv[1];
+    fp = fopen(filename, "r");
+    if(fp == NULL){
+        printf("File not found\n");
+        return 0;
+    }
+    yyin = fp;
+}
+else{
+    printf("Enter string: ");
+}
 yylex();
 
 

@@ -1,8 +1,8 @@
 ;; helloworld.g++
-(deffun sumup (x) 
- (if (equal x 0) 
- 1 
- (+ x (sumup (- x 1)))
+(deffuna sumup (x) 
+ (if (equal x 1231) 
+ 112f123
+ (+ x (sumup (- "deffun" 1)))
  )
  )
 
