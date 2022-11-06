@@ -3,27 +3,27 @@
     (loop for i from 0 to (1- (length string))
         collect (subseq string i (1+ i))))
 ; split keywords
-(setq listKeywords (split "list "))
-(setq appendKeywords (split "append "))
-(setq concatKeywords (split "concat "))
-(setq setKeywords (split "set "))
+(setq listKeywords (split "list"))
+(setq appendKeywords (split "append"))
+(setq concatKeywords (split "concat"))
+(setq setKeywords (split "set"))
 (setq deffunKeywords (split "deffun"))
-(setq forKeywords (split "for "))
-(setq ifKeywords (split "if "))
-(setq exitKeywords (split "exit "))
-(setq loadKeywords (split "load "))
-(setq dispKeywords (split "disp "))
-(setq trueKeywords (split "true "))
-(setq falseKeywords (split "false "))
-(setq andKeywords (split "and "))
-(setq orKeywords (split "or "))
-(setq notKeywords (split "not "))
-(setq equalKeywords (split "equal "))
-(setq lessKeywords (split "less "))
-(setq nilKeywords (split "nil "))
+(setq forKeywords (split "for"))
+(setq ifKeywords (split "if"))
+(setq exitKeywords (split "exit"))
+(setq loadKeywords (split "load"))
+(setq dispKeywords (split "disp"))
+(setq trueKeywords (split "true"))
+(setq falseKeywords (split "false"))
+(setq andKeywords (split "and"))
+(setq orKeywords (split "or"))
+(setq notKeywords (split "not"))
+(setq equalKeywords (split "equal"))
+(setq lessKeywords (split "less"))
+(setq nilKeywords (split "nil"))
 ; collect operators
 (setf operators '("(" "+" "-" "/" "*" "\"" "," ")"))
-(setq keywords '("and" "or" "not" "equal" "less" "nil" "list" "append" "concat" "set" "deffun" "for" "if" "exit" "load" "disp" "true" "false"))
+;(setq keywords '("AND" "OR" "NOT" "EQUAL" "LESS" "NIL" "LIST" "APPEND" "CONCAT" "SET" "DEFFUN" "FOR" "IF" "EXIT" "LOAD" "DISP" "TRUE" "FALSE"))
 (setf prin1Operators '( "OP_OP"  "OP_PLUS" "OP_MINUS" "OP_DIV" "OP_MULT" "OP_OC" "OP_COMMA" "OP_CP"))
 (setq operatorFlag 0)
 (setq deffunFlag 1)(setq ifFlag 0)(setq equalFlag 0)(setq lessFlag 0)(setq andFlag 0)
@@ -86,15 +86,17 @@
                     (setf valueStr (equal (elt word (1+ i)) "\""))
                     (setf spaceStr (equal (elt word (1+ i)) " "))
                     (cond
-                        (valueStr (setq returnedList (append returnedList (list (list "DEFFUN" "VALUESTR")))))
-                        (spaceStr (setq returnedList (append returnedList (list (list "DEFFUN" "KW_DEFFUN")))))
+                        (valueStr (setq returnedList (append returnedList (list (list "DEFFUN" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "DEFFUN" "KW_DEFFUN")))) )
                         ((and (not spaceStr) (not valueStr))  (setq deffunFlag 0))
+         
                     )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
 
-                    ;;(prin1 "SA")
+
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq ifFlag 1)
@@ -111,8 +113,16 @@
                     )
                 )
                 (when (and (equal ifFlag 1) (equal counter (length ifKeywords)))
-                    (setq returnedList (append returnedList (list (list "IF" "KW_IF"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "IF" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "IF" "KW_IF")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq ifFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -131,8 +141,16 @@
                     )
                 )
                 (when (and (equal equalFlag 1) (equal counter (length equalKeywords)))
-                    (setq returnedList (append returnedList (list (list "EQUAL" "KW_EQUAL"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "EQUAL" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "EQUAL" "KW_EQUAL")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq equalFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -151,8 +169,16 @@
                     )
                 )
                 (when (and (equal lessFlag 1) (equal counter (length lessKeywords)))
-                    (setq returnedList (append returnedList (list (list "LESS" "KW_LESS"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "LESS" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "LESS" "KW_LESS")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq lessFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -171,8 +197,16 @@
                     )
                 )
                 (when (and (equal andFlag 1) (equal counter (length andKeywords)))
-                    (setq returnedList (append returnedList (list (list "AND" "KW_AND"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "AND" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "AND" "KW_AND")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq andFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -191,8 +225,16 @@
                     )
                 )
                 (when (and (equal orFlag 1) (equal counter (length orKeywords)))
-                    (setq returnedList (append returnedList (list (list "OR" "KW_OR"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "OR" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "OR" "KW_OR")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq orFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -211,8 +253,16 @@
                     )
                 )
                 (when (and (equal notFlag 1) (equal counter (length notKeywords)))
-                    (setq returnedList (append returnedList (list (list "NOT" "KW_NOT"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "NOT" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "NOT" "KW_NOT")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq notFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -231,8 +281,16 @@
                     )
                 )
                 (when (and (equal trueFlag 1) (equal counter (length trueKeywords)))
-                    (setq returnedList (append returnedList (list (list "TRUE" "KW_TRUE"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "TRUE" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "TRUE" "KW_TRUE")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq trueFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -251,8 +309,16 @@
                     )
                 )
                 (when (and (equal falseFlag 1) (equal counter (length falseKeywords)))
-                    (setq returnedList (append returnedList (list (list "FALSE" "KW_FALSE"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "FALSE" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "FALSE" "KW_FALSE")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq falseFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -271,8 +337,16 @@
                     )
                 )
                 (when (and (equal nilFlag 1) (equal counter (length nilKeywords)))
-                    (setq returnedList (append returnedList (list (list "NIL" "KW_NIL"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "NIL" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "NIL" "KW_NIL")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq nilFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -291,8 +365,16 @@
                     )
                 )
                 (when (and (equal dispFlag 1) (equal counter (length dispKeywords)))
-                    (setq returnedList (append returnedList (list (list "DISP" "KW_DISP"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "DISP" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "DISP" "KW_DISP")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq dispFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -311,8 +393,16 @@
                     )
                 )
                 (when (and (equal exitFlag 1) (equal counter (length exitKeywords)))
-                    (setq returnedList (append returnedList (list (list "EXIT" "KW_EXIT"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "EXIT" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "EXIT" "KW_EXIT")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq exitFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -331,8 +421,16 @@
                     )
                 )
                 (when (and (equal loadFlag 1) (equal counter (length loadKeywords)))
-                    (setq returnedList (append returnedList (list (list "LOAD" "KW_LOAD"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "LOAD" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "LOAD" "KW_LOAD")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq loadFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -351,8 +449,16 @@
                     )
                 )
                 (when (and (equal concatFlag 1) (equal counter (length concatKeywords)))
-                    (setq returnedList (append returnedList (list (list "CONCAT" "KW_CONCAT"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "CONCAT" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "CONCAT" "KW_CONCAT")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq concatFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -371,8 +477,16 @@
                     )
                 )
                 (when (and (equal appendFlag 1) (equal counter (length appendKeywords)))
-                    (setq returnedList (append returnedList (list (list "APPEND" "KW_APPEND"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "APPEND" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "APPEND" "KW_APPEND")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq appendFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -391,8 +505,16 @@
                     )
                 )
                 (when (and (equal setFlag 1) (equal counter (length setKeywords)))
-                    (setq returnedList (append returnedList (list (list "SET" "KW_SET"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "SET" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "SET" "KW_SET")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq setFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -411,8 +533,16 @@
                     )
                 )
                 (when (and (equal listFlag 1) (equal counter (length listKeywords)))
-                    (setq returnedList (append returnedList (list (list "LIST" "KW_LIST"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "LIST" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "LIST" "KW_LIST")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq listFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
@@ -431,9 +561,16 @@
                     )
                 )
                 (when (and (equal forFlag 1) (equal counter (length forKeywords)))
-                    ;;(prin1 (list "FOR" "KW_FOR"))
-                    (setq returnedList (append returnedList (list (list "FOR" "KW_FOR"))))
+                    (setf valueStr (equal (elt word (1+ i)) "\""))
+                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (cond
+                        (valueStr (setq returnedList (append returnedList (list (list "FOR" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "FOR" "KW_FOR")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq forFlag 0))
+         
+                    )
                     (setq counter 0)
+                    
                 )
                 (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
