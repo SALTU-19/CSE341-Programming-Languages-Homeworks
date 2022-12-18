@@ -681,7 +681,7 @@
     returnedList
 )
 
-(defun gppinterpreter(fileContent)
+(defun gpplexer(fileContent)
     (setq returnedList (list ""))
     ; parse file content split by space
     (loop for line in fileContent do
@@ -702,24 +702,24 @@
     returnedList
 )
 
-(defun main ()
-    (when *args*
-        (setq filename (elt *args* 0))
-        ; call file read function
-        (setq fileContent (read-from-file filename))
-        ; call gppinterpreter function
-        (print (gppinterpreter fileContent))
-    )
-    (when (not *args*)
-        (princ "Enter input string: ")
+;; (defun main ()
+;;     (when *args*
+;;         (setq filename (elt *args* 0))
+;;         ; call file read function
+;;         (setq fileContent (read-from-file filename))
+;;         ; call gppinterpreter function
+;;         (print (gpplexer fileContent))
+;;     )
+;;     (when (not *args*)
+;;         (princ "Enter input string: ")
         
-        (setq inputString (read-line))
-        (print (gppinterpreter (list inputString)))
-    )
+;;         (setq inputString (read-line))
+;;         (print (gpplexer (list inputString)))
+;;     )
 
-)
-;; call main function
-(main)
+;; )
+;; ;; call main function
+;; (main)
 
 
 
