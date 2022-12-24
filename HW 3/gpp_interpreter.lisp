@@ -1,7 +1,9 @@
 (load "gpp_lexer.lisp")
 
 
-
+(setf arith-ops '("OP_PLUS" "OP_MINUS" "OP_DIV" "OP_MULT" ))
+(setf logic-ops '("KW_AND" "KW_OR" "KW_NOT" "KW_EQUAL"))
+(setf identifier-list '())
 
 (defun returnValue(list index)
 	(elt list index)
@@ -48,11 +50,23 @@
 				(setf value1 (check-arith-ops (nested-expression list value1Index '() t) 0 0 0))
 				(setf value2Index 7)
 			)
+			((equal (returnValue (elt list value1Index) 1) "IDENTIFIER")
+				(setf value1 (get-value (returnValue (elt list value1Index) 0) identifier-list))
+				(if (equal value1 -99999)
+					(return-from check-arith-ops "SYNTAX ERROR")
+				)
+			)
 			(t (setf value1 (parse-integer (returnValue (elt list value1Index) 0))))
 		)
 		(cond 
 			((equal (returnValue (elt list value2Index) 1) "OP_OP")
 				(setf value2 (check-arith-ops (nested-expression list value2Index '() t) 0 0 0))
+			)
+			((equal (returnValue (elt list value2Index) 1) "IDENTIFIER")
+				(setf value2 (get-value (returnValue (elt list value2Index) 0) identifier-list))
+				(if (equal value2 -99999)
+					(return-from check-arith-ops "SYNTAX ERROR")
+				)
 			)
 			(t (setf value2 (parse-integer (returnValue (elt list value2Index) 0))))
 		)
@@ -64,27 +78,51 @@
 				(setf value1 (check-arith-ops (nested-expression list value1Index '() t) 0 0 0))
 				(setf value2Index 7)
 			)
+			((equal (returnValue (elt list value1Index) 1) "IDENTIFIER")
+				(setf value1 (get-value (returnValue (elt list value1Index) 0) identifier-list))
+				(if (equal value1 -99999)
+					(return-from check-arith-ops "SYNTAX ERROR")
+				)
+			)
 			(t (setf value1 (parse-integer (returnValue (elt list value1Index) 0))))
 		)
 		(cond 
 			((equal (returnValue (elt list value2Index) 1) "OP_OP")
 				(setf value2 (check-arith-ops (nested-expression list value2Index '() t) 0 0 0))
+			)
+			((equal (returnValue (elt list value2Index) 1) "IDENTIFIER")
+				(setf value2 (get-value (returnValue (elt list value2Index) 0) identifier-list))
+				(if (equal value2 -99999)
+					(return-from check-arith-ops "SYNTAX ERROR")
+				)
 			)
 			(t (setf value2 (parse-integer (returnValue (elt list value2Index) 0))))
 		)
 		(setf result (- value1 value2))
 	)
-	(when (equal (returnValue (elt list 1) 1) "OP_MUL")
+	(when (equal (returnValue (elt list 1) 1) "OP_MULT")
 		(cond 
 			((equal (returnValue (elt list value1Index) 1) "OP_OP")
 				(setf value1 (check-arith-ops (nested-expression list value1Index '() t) 0 0 0))
 				(setf value2Index 7)
+			)
+			((equal (returnValue (elt list value1Index) 1) "IDENTIFIER")
+				(setf value1 (get-value (returnValue (elt list value1Index) 0) identifier-list))
+				(if (equal value1 -99999)
+					(return-from check-arith-ops "SYNTAX ERROR")
+				)
 			)
 			(t (setf value1 (parse-integer (returnValue (elt list value1Index) 0))))
 		)
 		(cond 
 			((equal (returnValue (elt list value2Index) 1) "OP_OP")
 				(setf value2 (check-arith-ops (nested-expression list value2Index '() t) 0 0 0))
+			)
+			((equal (returnValue (elt list value2Index) 1) "IDENTIFIER")
+				(setf value2 (get-value (returnValue (elt list value2Index) 0) identifier-list))
+				(if (equal value2 -99999)
+					(return-from check-arith-ops "SYNTAX ERROR")
+				)
 			)
 			(t (setf value2 (parse-integer (returnValue (elt list value2Index) 0))))
 		)
@@ -96,11 +134,23 @@
 				(setf value1 (check-arith-ops (nested-expression list value1Index '() t) 0 0 0))
 				(setf value2Index 7)
 			)
+			((equal (returnValue (elt list value1Index) 1) "IDENTIFIER")
+				(setf value1 (get-value (returnValue (elt list value1Index) 0) identifier-list))
+				(if (equal value1 -99999)
+					(return-from check-arith-ops "SYNTAX ERROR")
+				)
+			)
 			(t (setf value1 (parse-integer (returnValue (elt list value1Index) 0))))
 		)
 		(cond 
 			((equal (returnValue (elt list value2Index) 1) "OP_OP")
 				(setf value2 (check-arith-ops (nested-expression list value2Index '() t) 0 0 0))
+			)
+			((equal (returnValue (elt list value2Index) 1) "IDENTIFIER")
+				(setf value2 (get-value (returnValue (elt list value2Index) 0) identifier-list))
+				(if (equal value2 -99999)
+					(return-from check-arith-ops "SYNTAX ERROR")
+				)
 			)
 			(t (setf value2 (parse-integer (returnValue (elt list value2Index) 0))))
 		)
@@ -171,6 +221,43 @@
 	)
 	result
 )
+
+;; get the value of the variable
+(defun get-value (identifier identifier-list)
+	(if (null identifier-list)
+		(return-from get-value -99999)
+	)
+	(if (equal (returnValue (car identifier-list) 0) identifier)
+		(returnValue (car identifier-list) 1)
+		(get-value identifier (cdr identifier-list))
+	)
+)
+
+
+
+
+;; set the value of the variable
+(defun set-value (list identifier-list)
+	(setf tempList '())
+	(setf value 0)
+	(cond 
+		((equal (returnValue (elt list 2) 1) "IDENTIFIER")
+			;;(setf tempList (list (returnValue (elt list 2) 0) (parse-integer (returnValue (elt list 3) 0))))
+			(cond 
+				((equal (returnValue (elt list 3) 1) "OP_OP")
+					(setf value (check-arith-ops (nested-expression list 3 '() t) 0 0 0))
+				)
+				(t (setf value (parse-integer (returnValue (elt list 3) 0))))
+			)
+			(setf tempList (list (returnValue (elt list 2) 0) value))
+		)
+		(t (print "Syntax Error") (terpri))
+	)
+	(setf identifier-list (append identifier-list (list tempList)))
+	identifier-list
+)
+
+
 ;; control the input is arith-ops or not
 (defun is-arith-ops (list arith-ops)
 	(if (null arith-ops)
@@ -192,8 +279,7 @@
 	)
 )
 (defun main ()
-	(setf arith-ops '("OP_PLUS" "OP_MINUS" "OP_DIV" "OP_MULT" ))
-	(setf logic-ops '("KW_AND" "KW_OR" "KW_NOT" "KW_EQUAL"))
+	(setq set-op "OP_SET")
     (when *args*
         (setq filename (elt *args* 0))
         ; call file read function
@@ -203,31 +289,45 @@
 		(cond 
 			((parantesis-check lexer-list 0) 
 				(print "SYNTAX OK")
+				(terpri)
 			)
-			(t (print "SYNTAX ERROR"))
+			(t (print "SYNTAX ERROR") (terpri))
 		)		
     )
     (when (not *args*)
-        (princ "Enter input string: ")
-        
-        (setq inputString (read-line))
-        (setq lexer-list (gpplexer (list inputString)))
-		;;(print lexer-list)
-		(cond 
-			((parantesis-check lexer-list 0)
-				(cond 
-					((is-arith-ops lexer-list arith-ops)
-						(print (check-arith-ops lexer-list 0 0 0))
+		(setq inputString " ")
+		(loop while (not (equal inputString "exit")) do
+			(princ "Enter input string: ")
+			
+			(setq inputString (read-line))
+			(setq lexer-list (gpplexer (list inputString)))
+			;; (print lexer-list)
+			;; (terpri)
+			(cond 
+				((parantesis-check lexer-list 0)
+					(cond 
+						((is-arith-ops lexer-list arith-ops)
+							(print (check-arith-ops lexer-list 0 0 0))
+							(terpri)
+						)
 					)
-				)
-				(cond 
-					((is-logical-ops lexer-list logic-ops)
-						(print (check-logical-ops lexer-list 0 0 0))
+					(cond 
+						((is-logical-ops lexer-list logic-ops)
+							(print (check-logical-ops lexer-list 0 0 0))
+							(terpri)
+						)
 					)
-				)
+					(cond 
+						((equal (returnValue (elt lexer-list 1) 1) "KW_SET")
+							(setq identifier-list (set-value lexer-list identifier-list))
+							;; (print identifier-list)
+							(terpri)
+						)
+					)
 
+				)
+				(t (print "SYNTAX ERROR")(terpri))
 			)
-			(t (print "SYNTAX ERROR"))
 		)
     )
 
