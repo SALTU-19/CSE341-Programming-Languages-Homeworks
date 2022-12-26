@@ -84,7 +84,7 @@
                 )
                 (when (and (equal deffunFlag 1) (equal counter (length deffunKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "DEFFUN" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "DEFFUN" "KW_DEFFUN")))) )
@@ -114,7 +114,7 @@
                 )
                 (when (and (equal ifFlag 1) (equal counter (length ifKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "IF" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "IF" "KW_IF")))) )
@@ -142,7 +142,7 @@
                 )
                 (when (and (equal equalFlag 1) (equal counter (length equalKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "EQUAL" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "EQUAL" "KW_EQUAL")))) )
@@ -170,7 +170,7 @@
                 )
                 (when (and (equal lessFlag 1) (equal counter (length lessKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "LESS" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "LESS" "KW_LESS")))) )
@@ -198,7 +198,7 @@
                 )
                 (when (and (equal andFlag 1) (equal counter (length andKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "AND" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "AND" "KW_AND")))) )
@@ -226,7 +226,7 @@
                 )
                 (when (and (equal orFlag 1) (equal counter (length orKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "OR" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "OR" "KW_OR")))) )
@@ -254,7 +254,7 @@
                 )
                 (when (and (equal notFlag 1) (equal counter (length notKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "NOT" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "NOT" "KW_NOT")))) )
@@ -282,7 +282,7 @@
                 )
                 (when (and (equal trueFlag 1) (equal counter (length trueKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "TRUE" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "TRUE" "KW_TRUE")))) )
@@ -310,7 +310,7 @@
                 )
                 (when (and (equal falseFlag 1) (equal counter (length falseKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "FALSE" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "FALSE" "KW_FALSE")))) )
@@ -338,7 +338,7 @@
                 )
                 (when (and (equal nilFlag 1) (equal counter (length nilKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "NIL" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "NIL" "KW_NIL")))) )
@@ -366,7 +366,7 @@
                 )
                 (when (and (equal dispFlag 1) (equal counter (length dispKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "DISP" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "DISP" "KW_DISP")))) )
@@ -394,7 +394,7 @@
                 )
                 (when (and (equal exitFlag 1) (equal counter (length exitKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "EXIT" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "EXIT" "KW_EXIT")))) )
@@ -422,7 +422,7 @@
                 )
                 (when (and (equal loadFlag 1) (equal counter (length loadKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "LOAD" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "LOAD" "KW_LOAD")))) )
@@ -450,7 +450,7 @@
                 )
                 (when (and (equal concatFlag 1) (equal counter (length concatKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "CONCAT" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "CONCAT" "KW_CONCAT")))) )
@@ -478,7 +478,7 @@
                 )
                 (when (and (equal appendFlag 1) (equal counter (length appendKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "APPEND" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "APPEND" "KW_APPEND")))) )
@@ -506,7 +506,7 @@
                 )
                 (when (and (equal setFlag 1) (equal counter (length setKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "SET" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "SET" "KW_SET")))) )
@@ -534,7 +534,7 @@
                 )
                 (when (and (equal listFlag 1) (equal counter (length listKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "LIST" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "LIST" "KW_LIST")))) )
@@ -562,7 +562,7 @@
                 )
                 (when (and (equal whileFlag 1) (equal counter (length whileKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
-                    (setf spaceStr (equal (elt word (1+ i)) " "))
+                    (setf spaceStr (or (equal (elt word (1+ i)) " ") (equal (elt word (1+ i)) ")")))
                     (cond
                         (valueStr (setq returnedList (append returnedList (list (list "WHILE" "VALUESTR")))) )
                         (spaceStr (setq returnedList (append returnedList (list (list "WHILE" "KW_WHILE")))) )

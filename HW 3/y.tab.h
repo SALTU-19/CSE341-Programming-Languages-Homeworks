@@ -54,33 +54,28 @@ extern int yydebug;
     KW_NOT = 260,
     KW_EQUAL = 261,
     KW_LESS = 262,
-    KW_NIL = 263,
-    KW_LIST = 264,
-    KW_APPEND = 265,
-    KW_CONCAT = 266,
-    KW_SET = 267,
-    KW_DEFFUN = 268,
-    KW_FOR = 269,
-    KW_IF = 270,
-    KW_EXIT = 271,
-    KW_LOAD = 272,
-    KW_DISP = 273,
-    KW_TRUE = 274,
-    KW_FALSE = 275,
-    OP_PLUS = 276,
-    OP_MINUS = 277,
-    OP_DIV = 278,
-    OP_MULT = 279,
-    OP_OP = 280,
-    OP_CP = 281,
-    OP_DBLMULT = 282,
-    OP_OC = 283,
-    OP_CC = 284,
-    OP_COMMA = 285,
-    COMMENT = 286,
-    IDENTIFIER = 287,
-    VALUESTR = 288,
-    VALUE = 289
+    KW_SET = 263,
+    KW_DEFFUN = 264,
+    KW_WHILE = 265,
+    KW_IF = 266,
+    KW_EXIT = 267,
+    KW_DISP = 268,
+    KW_TRUE = 269,
+    KW_FALSE = 270,
+    OP_PLUS = 271,
+    OP_MINUS = 272,
+    OP_DIV = 273,
+    OP_MULT = 274,
+    OP_OP = 275,
+    OP_CP = 276,
+    OP_DBLMULT = 277,
+    OP_OC = 278,
+    OP_CC = 279,
+    OP_COMMA = 280,
+    COMMENT = 281,
+    IDENTIFIER = 282,
+    VALUESTR = 283,
+    VALUE = 284
   };
 #endif
 /* Tokens.  */
@@ -89,44 +84,39 @@ extern int yydebug;
 #define KW_NOT 260
 #define KW_EQUAL 261
 #define KW_LESS 262
-#define KW_NIL 263
-#define KW_LIST 264
-#define KW_APPEND 265
-#define KW_CONCAT 266
-#define KW_SET 267
-#define KW_DEFFUN 268
-#define KW_FOR 269
-#define KW_IF 270
-#define KW_EXIT 271
-#define KW_LOAD 272
-#define KW_DISP 273
-#define KW_TRUE 274
-#define KW_FALSE 275
-#define OP_PLUS 276
-#define OP_MINUS 277
-#define OP_DIV 278
-#define OP_MULT 279
-#define OP_OP 280
-#define OP_CP 281
-#define OP_DBLMULT 282
-#define OP_OC 283
-#define OP_CC 284
-#define OP_COMMA 285
-#define COMMENT 286
-#define IDENTIFIER 287
-#define VALUESTR 288
-#define VALUE 289
+#define KW_SET 263
+#define KW_DEFFUN 264
+#define KW_WHILE 265
+#define KW_IF 266
+#define KW_EXIT 267
+#define KW_DISP 268
+#define KW_TRUE 269
+#define KW_FALSE 270
+#define OP_PLUS 271
+#define OP_MINUS 272
+#define OP_DIV 273
+#define OP_MULT 274
+#define OP_OP 275
+#define OP_CP 276
+#define OP_DBLMULT 277
+#define OP_OC 278
+#define OP_CC 279
+#define OP_COMMA 280
+#define COMMENT 281
+#define IDENTIFIER 282
+#define VALUESTR 283
+#define VALUE 284
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 23 "gpp_interpreter.y"
+#line 20 "gpp_interpreter.y"
 
 	float num;
 	char string[100];
 
-#line 130 "y.tab.h"
+#line 120 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
