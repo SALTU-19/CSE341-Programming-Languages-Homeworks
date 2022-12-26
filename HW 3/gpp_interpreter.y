@@ -62,7 +62,7 @@ EXPI : OP_OP OP_PLUS EXPI EXPI OP_CP { $$ = $3 + $4; printResult($$);}
 	| OP_OP OP_DIV EXPI EXPI OP_CP { $$ = $3 / $4; if($4 == 0) {printf("Zero Division Error!");} else  printResult($$);}
     | OP_OP OP_MULT EXPI EXPI OP_CP { $$ = $3 * $4; printResult($$);}
 	| OP_OP OP_DBLMULT EXPI EXPI OP_CP { $$ = power($3,$4);printResult($$);}
-	| OP_OP KW_IF EXPB EXPLISTI EXPLISTI OP_CP {printf("Syntax OK.\n");}
+	| OP_OP KW_IF EXPB EXPI EXPI OP_CP {printf("Syntax OK.\n");}
 	| OP_OP KW_IF EXPB EXPLISTI OP_CP {if_condition($3);print_list();}
 	| OP_OP KW_FOR OP_OP IDENTIFIER EXPI EXPI OP_CP EXPLISTI OP_CP {for_loop($5,$6);}
 	| OP_OP KW_DEFFUN IDENTIFIER OP_OP IDENTIFIER OP_CP EXPI OP_CP{}

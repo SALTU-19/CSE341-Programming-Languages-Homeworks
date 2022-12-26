@@ -8,7 +8,7 @@
 (setq concatKeywords (split "concat"))
 (setq setKeywords (split "set"))
 (setq deffunKeywords (split "deffun"))
-(setq forKeywords (split "for"))
+(setq whileKeywords (split "while"))
 (setq ifKeywords (split "if"))
 (setq exitKeywords (split "exit"))
 (setq loadKeywords (split "load"))
@@ -23,11 +23,11 @@
 (setq nilKeywords (split "nil"))
 ; collect operators
 (setf operators '("(" "+" "-" "/" "*" "\"" "," ")"))
-;(setq keywords '("AND" "OR" "NOT" "EQUAL" "LESS" "NIL" "LIST" "APPEND" "CONCAT" "SET" "DEFFUN" "FOR" "IF" "EXIT" "LOAD" "DISP" "TRUE" "FALSE"))
+;(setq keywords '("AND" "OR" "NOT" "EQUAL" "LESS" "NIL" "LIST" "APPEND" "CONCAT" "SET" "DEFFUN" "while" "IF" "EXIT" "LOAD" "DISP" "TRUE" "FALSE"))
 (setf prin1Operators '( "OP_OP"  "OP_PLUS" "OP_MINUS" "OP_DIV" "OP_MULT" "OP_OC" "OP_COMMA" "OP_CP"))
 (setq operatorFlag 0)
 (setq deffunFlag 1)(setq ifFlag 0)(setq equalFlag 0)(setq lessFlag 0)(setq andFlag 0)
-(setq orFlag 0)(setq notFlag 0)(setq forFlag 0)(setq exitFlag 0)(setq loadFlag 0)(setq dispFlag 0)(setq trueFlag 0)
+(setq orFlag 0)(setq notFlag 0)(setq whileFlag 0)(setq exitFlag 0)(setq loadFlag 0)(setq dispFlag 0)(setq trueFlag 0)
 (setq falseFlag 0)(setq nilFlag 0)(setq listFlag 0)(setq appendFlag 0)(setq concatFlag 0)(setq setFlag 0)(setq counter 0)
 (setq valueFlag 0)(setq identifierFlag 0)(setf floatValue nil)
 (setq cCounter 0)
@@ -94,7 +94,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
 
 
                     (setq i (- i counter))
@@ -124,7 +124,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq equalFlag 1)
@@ -152,7 +152,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq lessFlag 1)
@@ -180,7 +180,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq andFlag 1)
@@ -208,7 +208,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq orFlag 1)
@@ -236,7 +236,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq notFlag 1)
@@ -264,7 +264,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq trueFlag 1)
@@ -292,7 +292,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq falseFlag 1)
@@ -320,7 +320,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq nilFlag 1)
@@ -348,7 +348,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq dispFlag 1)
@@ -376,7 +376,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq exitFlag 1)
@@ -404,7 +404,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq loadFlag 1)
@@ -432,7 +432,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq concatFlag 1)
@@ -460,7 +460,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq appendFlag 1)
@@ -488,7 +488,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq setFlag 1)
@@ -516,7 +516,7 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq listFlag 1)
@@ -544,35 +544,35 @@
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
-                    (setq forFlag 1)
+                    (setq whileFlag 1)
                 )
                 ;; check for keywords
-                (when (and (equal forFlag 1) (not (equal counter (length forKeywords))))
-                    (setq forEqual (equal (elt word i) (elt forKeywords counter)))
-                    (when forEqual
-                        (setq forFlag 1)
+                (when (and (equal whileFlag 1) (not (equal counter (length whileKeywords))))
+                    (setq whileEqual (equal (elt word i) (elt whileKeywords counter)))
+                    (when whileEqual
+                        (setq whileFlag 1)
                         (setq counter (1+ counter))
                     )
-                    (when (not forEqual)
-                        (setq forFlag 0)
+                    (when (not whileEqual)
+                        (setq whileFlag 0)
                     )
                 )
-                (when (and (equal forFlag 1) (equal counter (length forKeywords)))
+                (when (and (equal whileFlag 1) (equal counter (length whileKeywords)))
                     (setf valueStr (equal (elt word (1+ i)) "\""))
                     (setf spaceStr (equal (elt word (1+ i)) " "))
                     (cond
-                        (valueStr (setq returnedList (append returnedList (list (list "FOR" "VALUESTR")))) )
-                        (spaceStr (setq returnedList (append returnedList (list (list "FOR" "KW_FOR")))) )
-                        ((and (not spaceStr) (not valueStr))  (setq forFlag 0))
+                        (valueStr (setq returnedList (append returnedList (list (list "WHILE" "VALUESTR")))) )
+                        (spaceStr (setq returnedList (append returnedList (list (list "WHILE" "KW_WHILE")))) )
+                        ((and (not spaceStr) (not valueStr))  (setq whileFlag 0))
          
                     )
                     (setq counter 0)
                     
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq valueFlag 1)
@@ -609,7 +609,7 @@
                     )
                     (setq counter 0)
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     
                     (setq i (- i counter))
                     (setq counter 0)
@@ -654,7 +654,7 @@
                         (setf exitLoopFlag t)
                         (setq counter 0)
                         (setq deffunFlag 1)(setq ifFlag 0)(setq equalFlag 0)(setq lessFlag 0)(setq andFlag 0)
-                        (setq orFlag 0)(setq notFlag 0)(setq forFlag 0)(setq exitFlag 0)(setq loadFlag 0)(setq dispFlag 0)(setq trueFlag 0)
+                        (setq orFlag 0)(setq notFlag 0)(setq whileFlag 0)(setq exitFlag 0)(setq loadFlag 0)(setq dispFlag 0)(setq trueFlag 0)
                         (setq falseFlag 0)(setq nilFlag 0)(setq listFlag 0)(setq appendFlag 0)(setq concatFlag 0)(setq setFlag 0)(setq counter 0)
                         (setq valueFlag 0)(setq identifierFlag 0)
                     )
@@ -666,12 +666,12 @@
                     ;;(setq returnedList (append returnedList (list (list (concatString identiferListTemp) "IDENTIFIER"))))
                     (setq counter 0)
                 )
-                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal forFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
+                (when (and (equal deffunFlag 0)(equal equalFlag 0)(equal ifFlag 0)(equal lessFlag 0)(equal andFlag 0)(equal orFlag 0)(equal notFlag 0)(equal whileFlag 0)(equal exitFlag 0)(equal loadFlag 0)(equal dispFlag 0)(equal trueFlag 0)(equal falseFlag 0)(equal nilFlag 0)(equal listFlag 0)(equal appendFlag 0)(equal concatFlag 0)(equal setFlag 0)(equal valueFlag 0)(equal identifierFlag 0))
                     
                     (setq i (- i counter))
                     (setq counter 0)
                     (setq deffunFlag 1)(setq ifFlag 0)(setq equalFlag 0)(setq lessFlag 0)(setq andFlag 0)
-                    (setq orFlag 0)(setq notFlag 0)(setq forFlag 0)(setq exitFlag 0)(setq loadFlag 0)(setq dispFlag 0)(setq trueFlag 0)
+                    (setq orFlag 0)(setq notFlag 0)(setq whileFlag 0)(setq exitFlag 0)(setq loadFlag 0)(setq dispFlag 0)(setq trueFlag 0)
                     (setq falseFlag 0)(setq nilFlag 0)(setq listFlag 0)(setq appendFlag 0)(setq concatFlag 0)(setq setFlag 0)(setq counter 0)
                     (setq valueFlag 0)(setq identifierFlag 0)
                 )
